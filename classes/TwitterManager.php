@@ -8,18 +8,29 @@ class TwitterManager {
         $this->to = new TwistOAuth($cfg['CONSUMER_KEY'], $cfg['CONSUMER_SECRET'], $cfg['OAUTH_TOKEN'], $cfg['OAUTH_TOKEN_SECRET']);
     }
 
-    public function get_tweets($screen_name = NULL) {
-        $param = array(
-            'screen_name' => $screen_name,
-            'count' => 200,
-        );
-        $res = $this->to->get('statuses/user_timeline', $param);
+    public function get_home_timeline($count = 200) {
+        return $this->get_timeline($count);
+    }
+
+    public function get_timeline($count = 100, $screen_name = NULL) {
+        $query = 'statuses/home_timeline';
+        $params = array();
+        $params['count'] = $count;
+        if (isset($screen_name)) {
+            $query = 'statuses/user_timeline';
+            $params['screen_name'] = $screen_name;
+        }
+        $res = $this->to->get($query, $params);
+        if (isset($res['errors'])) {
+            echo $res['errors'];
+        }
         if (isset($res->errors)) {
             var_dump($res->errors);
             return;
         }
         return $res;
     }
+
     public function get_friends_profile_image_hashes($screen_name = NULL) {
         $hashes = array();
         foreach (get_friends_profile_image($screen_name) as $url) {
@@ -33,10 +44,10 @@ class TwitterManager {
     }
 
     public function get_friends_profile_image($screen_name = NULL) {
-        $param = array(
+        $params = array(
             'count' => 5000,
         );
-        $res = $this->to->get('friends/ids', $param);
+        $res = $this->to->get('friends/ids', $params);
         if (isset($res->errors)) {
             var_dump($res->errors);
             return;
@@ -56,22 +67,6 @@ class TwitterManager {
             }
         }
         return $urls;
-    }
-
-    public function get_timeline($count = 100, $screen_name = NULL) {
-        $query = 'statuses/home_timeline';
-        $param = array(
-            'count' => $count,
-        );
-        if (isset($screen_name)) {
-            $query = 'statuses/user_timeline';
-            $param['screen_name'] = $screen_name;
-        }
-        $res = $this->to->get($query, $param);
-        if (isset($res['errors'])) {
-            echo $res['errors'];
-        }
-        return $res;
     }
 
     public function search_tweets($q = "#nowplaying μ's") {
@@ -105,14 +100,12 @@ class TwitterManager {
         return array_values(array_unique($source_list));
     }
 
-    public function sn_to_id($sn) {
-        // screen_name to id
-        $query = 'users/lookup';
+    public function post_tweet($text) {
+        $query = 'statuses/update';
         $params = array(
-            'screen_name' => 'akameco',
+            'status' => $text,
         );
-        $res = $this->to->get($query, $params);
-        return $res->id;
+        $res = $this->to->post($query, $params);
     }
 
     public function change_user_name($name) {
@@ -125,13 +118,14 @@ class TwitterManager {
         return $res;
     }
 
-    public function get_user_tweet($sn) {
+    public function sn_to_id($sn) {
         // screen_name to id
-        $query = 'statuses/user_timeline';
+        $query = 'users/lookup';
         $params = array(
-            'screen_name' => $sn,
+            'screen_name' => 'akameco',
         );
         $res = $this->to->get($query, $params);
-        return $res;
+        return $res->id;
     }
+
 }
