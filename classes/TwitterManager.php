@@ -45,7 +45,7 @@ class TwitterManager {
     public function get_statuses_mentions_timeline_max() {
         $max_id = NULL;
         $statuses = array();
-        for ($i = 0; $i < 5; $i++) {
+        for ($i = 0; $i < 15; $i++) {
             $res = $this->get_statuses_mentions_timeline($max_id);
             $c = count($res);
             if ($c == 0) {
@@ -185,8 +185,10 @@ class TwitterManager {
 
     public function post_lists_members_create_all_single($list_id, $user_ids) {
         $query = "lists/members/create_all";
+        $ids_str = implode(',', $user_ids);
         $params = array(
-            'list_id' => $user_ids,
+            'list_id' => $list_id,
+            'user_id' => $ids_str,
         );
         $this->to->post($query, $params);
     }
