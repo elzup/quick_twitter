@@ -118,6 +118,30 @@ class TwitterManager {
         return $res;
     }
 
+    public function get_list_lists() {
+        $query = 'lists/list';
+        return $this->to->get($query);
+    }
+
+    public function get_list_members($list_id, $count = 20) {
+        $query = 'lists/members';
+        $params = array(
+            'list_id' => $list_id,
+            'count' => $count,
+        );
+        return $this->to->get($query, $params);
+    }
+
+    public function get_list_member_ids($list_id, $count = 20) {
+        $members = $this->get_list_members($list_id, $count);
+        $ids = array();
+        foreach ($members->users as $member) {
+            $ids[] = $member->id;
+        }
+        return $ids;
+    }
+
+
     public function sn_to_id($sn) {
         // screen_name to id
         $query = 'users/lookup';
@@ -128,4 +152,12 @@ class TwitterManager {
         return $res->id;
     }
 
+    public function list_name_to_id($name) {
+        foreach ($this->get_list_lists() as $list) {
+            if ($list->name == $name) {
+                return $list->id;
+            }
+        }
+        return NULL;
+    }
 }
