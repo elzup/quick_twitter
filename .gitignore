@@ -1,2 +1,5 @@
 keys.php
 vendor/
+composer.lock
+
+test.php
