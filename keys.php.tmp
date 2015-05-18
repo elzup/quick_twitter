@@ -1,0 +1,17 @@
+<?php
+switch (ACCOUNT) {
+case ACCOUNT_TEST:
+    define('CONSUMER_KEY'       , '********');
+    define('CONSUMER_SECRET'    , '********');
+    define('OAUTH_TOKEN'        , '********');
+    define('OAUTH_TOKEN_SECRET' , '********');
+    break;
+case ACCOUNT_ARZZUP:
+    define('CONSUMER_KEY'       , '********');
+    define('CONSUMER_SECRET'    , '********');
+    define('OAUTH_TOKEN'        , '********');
+    define('OAUTH_TOKEN_SECRET' , '********');
+    break;
+default:
+    break;
+}

@@ -1,0 +1,133 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
+    ],
+    "hash": "d758d5f9248ff77c4b9228b43ad3a0fb",
+    "packages": [
+        {
+            "name": "abraham/twitteroauth",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/abraham/twitteroauth.git",
+                "reference": "65de9190f4313ba0824bff1ce8e059f03831955f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/abraham/twitteroauth/zipball/65de9190f4313ba0824bff1ce8e059f03831955f",
+                "reference": "65de9190f4313ba0824bff1ce8e059f03831955f",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpmd/phpmd": "2.*",
+                "phpunit/phpunit": "4.*",
+                "squizlabs/php_codesniffer": "2.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Abraham\\TwitterOAuth\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Abraham Williams",
+                    "email": "abraham@abrah.am",
+                    "homepage": "https://abrah.am",
+                    "role": "Developer"
+                }
+            ],
+            "description": "The most popular PHP library for use with the Twitter OAuth REST API.",
+            "homepage": "https://twitteroauth.com",
+            "keywords": [
+                "Twitter API",
+                "Twitter oAuth",
+                "api",
+                "oauth",
+                "rest",
+                "social",
+                "twitter"
+            ],
+            "time": "2015-05-08 00:31:17"
+        },
+        {
+            "name": "mpyw/twistoauth",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mpyw/TwistOAuth.git",
+                "reference": "518f2dfbdc3bb1fbe03ac6fed7799a1d64ae018f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mpyw/TwistOAuth/zipball/518f2dfbdc3bb1fbe03ac6fed7799a1d64ae018f",
+                "reference": "518f2dfbdc3bb1fbe03ac6fed7799a1d64ae018f",
+                "shasum": ""
+            },
+            "require": {
+                "ext-hash": "*",
+                "ext-json": "*",
+                "ext-reflection": "*",
+                "lib-curl": "*",
+                "lib-libxml": "*",
+                "lib-openssl": "*",
+                "lib-pcre": "*",
+                "php": ">=5.3.2"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-2-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "CertaiN",
+                    "email": "ryosuke_i_628@yahoo.co.jp",
+                    "homepage": "https://gravatar.com/mpyw",
+                    "role": "developer"
+                }
+            ],
+            "description": "Advanced PHP Twitter library.",
+            "keywords": [
+                "Twitpic",
+                "UserStream",
+                "api",
+                "async",
+                "asynchronous",
+                "image",
+                "multiple",
+                "oauth",
+                "paralell",
+                "streaming",
+                "twitter",
+                "upload"
+            ],
+            "time": "2015-05-18 05:17:42"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": {
+        "abraham/twitteroauth": 20,
+        "mpyw/twistoauth": 20
+    },
+    "prefer-stable": false,
+    "platform": [],
+    "platform-dev": []
+}
