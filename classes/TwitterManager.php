@@ -31,6 +31,41 @@ class TwitterManager {
         return $res;
     }
 
+    public function get_statuses_mentions_timeline($max_id = NULL) {
+        $query = 'statuses/mentions_timeline';
+        $params = array(
+            'count' => 200,
+        );
+        if (isset($max_id)) {
+            $params['max_id'] = $max_id;
+        }
+        return $this->to->get($query, $params);
+    }
+
+    public function get_statuses_mentions_timeline_max() {
+        $max_id = NULL;
+        $statuses = array();
+        for ($i = 0; $i < 5; $i++) {
+            $res = $this->get_statuses_mentions_timeline($max_id);
+            $c = count($res);
+            if ($c == 0) {
+                break;
+            }
+            $statuses = array_merge($statuses, $res);
+            $max_id = $res[$c - 1]->id - 1;
+        }
+        return $statuses;
+    }
+
+    public function get_statuses_mentions_user_ids() {
+        $statuses = $this->get_statuses_mentions_timeline_max();
+        $ids = array();
+        foreach ($statuses as $st) {
+            $ids[] = $st->user->id;
+        }
+        return array_unique($ids);
+    }
+
     public function get_friends_profile_image_hashes($screen_name = NULL) {
         $hashes = array();
         foreach (get_friends_profile_image($screen_name) as $url) {
@@ -141,6 +176,20 @@ class TwitterManager {
         return $ids;
     }
 
+    public function post_lists_members_create_all($list_id, $user_ids) {
+        $chunks = array_chunk($user_ids, 100);
+        foreach ($chunks as $ids) { 
+            $this->post_lists_members_create_all_single($list_id, $ids);
+        }
+    }
+
+    public function post_lists_members_create_all_single($list_id, $user_ids) {
+        $query = "lists/members/create_all";
+        $params = array(
+            'list_id' => $user_ids,
+        );
+        $this->to->post($query, $params);
+    }
 
     public function sn_to_id($sn) {
         // screen_name to id
